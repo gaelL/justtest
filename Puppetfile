@@ -10,3 +10,8 @@ mod 'numeter',
 mod 'nova',
   :git => 'https://github.com/enovance/puppet-nova',
   :ref => 'c41567b14773de20c72204c5bce9e55e5210944c'
+
+# Install filemapper and use a specific git commit
+mod 'nova-master',
+  :git => 'https://github.com/enovance/puppet-nova',
+  :ref => 'master'
