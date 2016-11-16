@@ -16,7 +16,7 @@
         {
             "type": "shell",
             "inline": [
-                "sudo apt-get update; sudo apt-get install -y ansible",
+                "# sudo apt-get update; sudo apt-get install -y ansible",
                 "sudo ip a",
                 "sudo cat /etc/resolv.conf",
                 "sudo ping -c 1 google.fr",
