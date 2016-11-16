@@ -21,8 +21,8 @@
                 "sudo ping -c 1 google.fr",
                 "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA3gH0VocXkTRHxgMAcNRgZfe1y1OC+MtJ3vmkX3K28A7FgCE7VtonZuWq7Yviz7/SSCrX29MWo+LRWKKB94c9oAORIEssqelliAnPrZn3xizpkMI0f3Mn86RW86qDCcXlm6aX5uIjbbjkBLrwm06exqlVCfTdmdD+SugHVw10rSe4Nki8ndTjO9J9MksSoYdH9cXZbnd2NQcGMcR8ziQEsOsoFMZDnEJGW7XHkO3mdqLNgpCdXN9vBCSdhvTYTO4vG5//ide3hXXW47INknwLvpOkKlnbVRJj9oZurmcTeJTUsuA5b+ZqxtqFIb6VG1WVk6HXdzpeH4ttKSB6RlT0Bw== gael@gael' | sudo tee -a /root/.ssh/authorized_keys",
                 "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA3gH0VocXkTRHxgMAcNRgZfe1y1OC+MtJ3vmkX3K28A7FgCE7VtonZuWq7Yviz7/SSCrX29MWo+LRWKKB94c9oAORIEssqelliAnPrZn3xizpkMI0f3Mn86RW86qDCcXlm6aX5uIjbbjkBLrwm06exqlVCfTdmdD+SugHVw10rSe4Nki8ndTjO9J9MksSoYdH9cXZbnd2NQcGMcR8ziQEsOsoFMZDnEJGW7XHkO3mdqLNgpCdXN9vBCSdhvTYTO4vG5//ide3hXXW47INknwLvpOkKlnbVRJj9oZurmcTeJTUsuA5b+ZqxtqFIb6VG1WVk6HXdzpeH4ttKSB6RlT0Bw== gael@gael' | sudo tee -a /home/admin/.ssh/authorized_keys",
-                "sudo apt-get cache search",
-                "sudo apt-get cache policy ansible",
+                "sudo apt-cache search",
+                "sudo apt-cache policy ansible",
                 "sudo apt-get update; sudo apt-get install -y ansible",
                 "sleep 1"
             ]
