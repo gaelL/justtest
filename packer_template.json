@@ -13,9 +13,15 @@
   ],
 
   "provisioners": [
-{
-  "type": "ansible-local",
-  "playbook_file": "local.yml"
-}
+        {
+            "type": "shell",
+            "inline": [
+                "apt-get install -y ansible"
+            ]
+        },
+    {
+      "type": "ansible-local",
+      "playbook_file": "local.yml"
+    }
   ]
 }
