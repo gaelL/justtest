@@ -1,3 +1,3 @@
 #!/bin/sh
 
-touch /opt/fooooo
+sudo touch /opt/fooooo
