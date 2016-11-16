@@ -29,7 +29,7 @@
                 "sudo apt-cache policy ansible 2>&1 | tee -a /tmp/log",
                 "sudo apt-get update; sudo apt-get install -y -t jessie-backports ansible",
                 "echo sleep ...",
-                "sleep 1000"
+                "sleep 1"
             ]
         },
     {
