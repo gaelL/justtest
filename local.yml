@@ -2,6 +2,8 @@
 
 - hosts: localhost
   connection: local
-  become: true
+  remote_user: root
   tasks:
    - file: dest=/opt/fooooo state=touch
+   - command: id
+     #become: true
