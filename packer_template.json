@@ -7,8 +7,7 @@
   "source_ami": "ami-e079f893",
   "instance_type": "t2.micro",
   "ami_name": "packer-quick-start {{timestamp}}",
-  "ssh_username": "admin",
-  "shutdown_behaviour": "stop"
+  "ssh_username": "admin"
 
     }
   ],
@@ -18,7 +17,7 @@
             "type": "shell",
             "inline": [
                 "sudo apt-get update",
-                "sudo apt-get install -y ansible python-apt python-pycurl"
+                "sleep 1000"
             ]
         },
     {
