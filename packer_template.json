@@ -7,8 +7,11 @@
   "source_ami": "ami-e079f893",
   "instance_type": "t2.micro",
   "ami_name": "packer-quick-start {{timestamp}}",
-  "ssh_username": "admin"
-
+  "ssh_username": "admin",
+  "tags": {
+	  "Name": "PACKER-CONCOURSE-TEST",
+	  "env": "TEST"
+  }
     }
   ],
 
