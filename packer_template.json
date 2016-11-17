@@ -5,7 +5,7 @@
   "type": "amazon-ebs",
   "region": "eu-west-1",
   "source_ami": "ami-e079f893",
-  "instance_type": "t2.micro",
+  "instance_type": "t2.nano",
   "ami_name": "packer-quick-start {{timestamp}}",
   "ssh_username": "admin",
   "tags": {
