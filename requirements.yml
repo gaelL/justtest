@@ -1,0 +1,7 @@
+- src: git@github.com:cycloidio/ansible-sensu
+  version: master
+  name: cycloid.sensu
+  scm: git
+
+- src: jdauphant.nginx
+
