@@ -4,6 +4,8 @@
   connection: local
   remote_user: root
   become: yes
+  roles:
+    - {role: jdauphant.nginx, tags: nginx}
   tasks:
    - file: dest=/opt/fooooo state=touch
    - command: id
