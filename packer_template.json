@@ -35,7 +35,7 @@
                 "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuTyUwlpyNlmPsDfCcvgRnH4qQUWZ+b6/MCay+NF5w0I7E2L5WFDrk0BB0qyHr2GTVQnJR7Tdm2Jr6UynlSZel2XYZtmbSgqjUU7/xNWIhYNBeQqAuKPWczxwZ4iTD2gBiorLXiHQ5cxWsOYqk2YTgRYOq59E2xg+IWxcNYrGMkvvP/zNzqVt50wyZ6jLEL0wwKp4Dm+z07jeDzguQt5Ob4wzswCNxHRFPJjtwY4dYGlfk34XgzsB2s6Fq/74gmQ/blMbE0Q49o7C+gt/l0KlyU9QIv21BUoPHyHm90/JvJCtfWyUgEAA82XnRSR8bLLcnh90T3s+YwdVVqNzsauyP' | sudo tee -a /home/admin/.ssh/authorized_keys",
                 "sudo apt-cache search ansible 2>&1 | tee -a /tmp/log",
                 "sudo apt-cache policy ansible 2>&1 | tee -a /tmp/log",
-                "sudo apt-get update; sudo apt-get install -y -t jessie-backports ansible",
+                "sudo apt-get update; sudo apt-get install -y -t jessie-backports ansible git",
                 "chmod 600 /home/admin/.ssh/id_rsa",
                 "echo 'Host *' >> /home/admin/.ssh/config",
                 "echo 'StrictHostKeyChecking no' >> /home/admin/.ssh/config",
