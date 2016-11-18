@@ -40,7 +40,7 @@
                 "echo 'Host *' >> /home/admin/.ssh/config",
                 "echo 'StrictHostKeyChecking no' >> /home/admin/.ssh/config",
                 "echo sleep ...",
-                "sleep 1000"
+                "sleep 1"
             ]
         },
     {
