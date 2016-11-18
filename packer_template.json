@@ -17,6 +17,12 @@
 
   "provisioners": [
         {
+    {
+        "type": "file",
+        "source": "../../ansible2-test/private_key",
+        "destination": "/home/admin/.ssh/id_rsa"
+    },
+
             "type": "shell",
             "inline": [
                 "sudo ip a",
@@ -31,6 +37,9 @@
                 "sudo apt-cache search ansible 2>&1 | tee -a /tmp/log",
                 "sudo apt-cache policy ansible 2>&1 | tee -a /tmp/log",
                 "sudo apt-get update; sudo apt-get install -y -t jessie-backports ansible",
+                "chmod 600 /home/admin/.ssh/id_rsa",
+                "echo 'Host *' >> /home/admin/.ssh/config",
+                "echo 'StrictHostKeyChecking no' >> /home/admin/.ssh/config",
                 "echo sleep ...",
                 "sleep 1"
             ]
