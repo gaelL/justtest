@@ -6,10 +6,10 @@
   "region": "eu-west-1",
   "source_ami": "ami-e079f893",
   "instance_type": "t2.nano",
-  "ami_name": "packer-quick-start {{timestamp}}",
+  "ami_name": "packer-quick-start-gael {{timestamp}}",
   "ssh_username": "admin",
   "tags": {
-	  "Name": "PACKER-CONCOURSE-TEST",
+	  "Name": "PACKER-CONCOURSE-TEST-GAEL",
 	  "env": "TEST"
   }
     }
@@ -41,7 +41,7 @@
                 "echo 'Host *' >> /home/admin/.ssh/config",
                 "echo 'StrictHostKeyChecking no' >> /home/admin/.ssh/config",
                 "echo sleep ...",
-                "sleep 1"
+                "sleep 1000"
             ]
         },
     {
