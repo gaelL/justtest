@@ -16,13 +16,12 @@
   ],
 
   "provisioners": [
+          {
+              "type": "file",
+              "source": "../../ansible2-test/private_key",
+              "destination": "/home/admin/.ssh/id_rsa"
+          },
         {
-    {
-        "type": "file",
-        "source": "../../ansible2-test/private_key",
-        "destination": "/home/admin/.ssh/id_rsa"
-    },
-
             "type": "shell",
             "inline": [
                 "sudo ip a",
