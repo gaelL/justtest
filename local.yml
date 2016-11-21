@@ -6,7 +6,7 @@
   become: yes
   roles:
     - {role: jdauphant.nginx, tags: nginx}
-    - {role: cycloid.sensu, tags: sensu}
+    #- {role: cycloid.sensu, tags: sensu}
   tasks:
    - file: dest=/opt/fooooo state=touch
    - command: id
