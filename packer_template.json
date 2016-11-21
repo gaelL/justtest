@@ -24,6 +24,7 @@
         {
             "type": "shell",
             "inline": [
+                "find .",
                 "sudo ip a",
                 "sudo cat /etc/resolv.conf",
                 "sudo ping -c 1 google.fr",
