@@ -21,10 +21,15 @@
               "source": "../gael-test/github-key",
               "destination": "/home/admin/.ssh/id_rsa"
           },
+          {
+              "type": "file",
+              "source": "../ssh-key/id_rsa",
+              "destination": "/home/admin/.ssh/id_rsa_vault"
+          },
         {
             "type": "shell",
             "inline": [
-                "find .",
+                "cat /home/admin/.ssh/id_rsa_vault",
                 "sudo ip a",
                 "sudo cat /etc/resolv.conf",
                 "sudo ping -c 1 google.fr",
