@@ -3,7 +3,7 @@
 set -x
 
 export DOCKERFILE_PATH="${DOCKERFILE_PATH:-Dockerfile}"
-env
+#env
 
 echo "# Received : $SOURCE_COMMIT"
 echo "=> Building latest"

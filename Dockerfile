@@ -1,5 +1,5 @@
-ARG ANSIBLE_VERSION=-1
-
 FROM alpine
+
+ARG ANSIBLE_VERSION=default
 
 RUN echo "Version: "${ANSIBLE_VERSION} | tee  /version
