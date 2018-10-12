@@ -2,7 +2,7 @@
 
 set -x
 
-export DOCKERFILE_PATH="${DOCKERFILE_PATH:-.}"
+export DOCKERFILE_PATH="${DOCKERFILE_PATH:-Dockerfile}"
 
 
 env
