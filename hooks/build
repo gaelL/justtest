@@ -1,6 +1,10 @@
 #!/bin/bash
 
 set -x
+
+export DOCKERFILE_PATH="${DOCKERFILE_PATH:-.}"
+
+
 env
 
 echo "# Received : $SOURCE_COMMIT"
