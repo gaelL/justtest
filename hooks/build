@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "=> Building latest"
+docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+
