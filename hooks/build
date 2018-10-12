@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set +x
+set -x
 env
 
 echo "# Received : $SOURCE_COMMIT"
