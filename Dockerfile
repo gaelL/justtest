@@ -1,5 +1,5 @@
-ARG ANSIBLE_VERSION
+ARG ANSIBLE_VERSION=-1
 
 FROM alpine
 
-RUN echo "Version: "$ANSIBLE_VERSION > /version
+RUN echo "Version: "${ANSIBLE_VERSION} > /version
