@@ -1,0 +1,247 @@
+version: 2.1
+
+jobs:
+  build-test:
+    docker:
+      - image: google/cloud-sdk:299.0.0-slim
+        environment:
+          COMPOSE_DOCKER_CLI_BUILD: "1"
+          DOCKER_BUILDKIT: "1"
+    working_directory: ~/repo/
+    steps:
+      - checkout:
+          path: ~/repo
+      - setup_remote_docker:
+          version: 19.03.12
+          docker_layer_caching: true
+      - run:
+          name: Build App
+          command: |
+            echo Build App
+      - run:
+          name: Test App
+          when: always
+          command: |
+            echo test app
+      - run:
+          name: Generate OpenAPI files
+          when: always
+          command: |
+            echo Generate OpenAPI files
+      - run:
+          name: Extract test result
+          when: always
+          command: |
+            echo Extract test result
+      - store_test_results:
+          when: always
+          name: Store tests results
+          path: ~/repo/tests
+      - store_test_results:
+          when: always
+          name: Store tests results  for Open API Container
+          path: ~/repo/src/tests-openapi
+      - store_artifacts:
+          when: always
+          name: Store artifact
+          path: ~/repo/tests
+      - store_artifacts:
+          when: always
+          name: Store artifact for Open API Container
+          path: ~/repo/src/tests-openapi
+
+  configure_env:
+    docker:
+      - image: hashicorp/terraform:1.0.2
+        environment:
+          TF_ADMIN: test
+    working_directory: ~/repo/
+    steps:
+      - checkout:
+          path: ~/repo
+      - run:
+          name: Authenticate on terraform with service account
+          command: |
+            echo ok
+      - run:
+          name: Collect GCP environnement variable with terraform
+          command: |
+            exit 0
+
+  validate_openapi:
+    docker:
+      - image: google/cloud-sdk:299.0.0-slim
+    working_directory: ~
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - run:
+          name: Authenticate on Google Cloud with service account
+          command: |
+            exit 0
+      - store_artifacts:
+          path: ~/workspace/openAPI/
+          destination: openAPI
+
+  publish_image:
+    docker:
+      - image: google/cloud-sdk:299.0.0-slim
+    working_directory: ~/repo/
+    steps:
+      - checkout:
+          path: ~/repo
+      - attach_workspace:
+          at: ~/repo/workspace
+      - setup_remote_docker:
+          version: 19.03.12
+          docker_layer_caching: true
+      - run:
+          name: Authenticate on Google Cloud with service account
+          command: |
+            echo ok
+
+  deploy:
+    docker:
+      - image: google/cloud-sdk:299.0.0
+        environment:
+          CONTAINER_NAME_API: supervisor-api
+          CONTAINER_NAME_FRONT: supervisor-front
+    working_directory: ~/repo/
+    steps:
+      - checkout:
+          path: ~/repo
+      - attach_workspace:
+          at: ~/repo/workspace
+      - run:
+          name: Authenticate on Google Cloud with service account
+          command: |
+            echo ok
+
+  deploy_feature:
+    docker:
+      - image: google/cloud-sdk:299.0.0
+        environment:
+          CONTAINER_NAME_API: supervisor-api
+          CONTAINER_NAME_FRONT: supervisor-front
+    working_directory: ~/repo
+    steps:
+      - checkout:
+          path: ~/repo
+      - attach_workspace:
+          at: ~/repo/workspace
+      - run:
+          name: Authenticate on Google Cloud with service account
+          command: |
+            echo ok
+
+  delete_feature:
+    docker:
+      - image: google/cloud-sdk:299.0.0
+    working_directory: ~
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - run:
+          name: Authenticate on Google Cloud with service account
+          command: |
+            echo ok
+
+workflows:
+  version: 2
+
+  commit_workflow:
+    jobs:
+      - build-test:
+          name: Build, Tests and generate Open API v2
+      - configure_env:
+          name: GCP Configuration
+      - validate_openapi:
+          name: OpenAPI validation
+          requires:
+            - Build, Tests and generate Open API v2
+            - GCP Configuration
+
+      # Automatic publish image (dev/rct/prod)
+      - publish_image:
+          name: Publish image (auto)
+          requires:
+            - Build, Tests and generate Open API v2
+            - GCP Configuration
+            - OpenAPI validation
+          filters:
+            branches:
+              only:
+                - develop
+                - /release\/.*/
+                - master
+
+      # Automatic deploy (dev/rct)
+      - deploy:
+          name: Deploy dev
+          requires:
+            - Publish image (auto)
+          filters:
+            branches:
+              only:
+                - develop
+      - deploy:
+          name: Deploy recette
+          requires:
+            - Publish image (auto)
+          filters:
+            branches:
+              only:
+                - /release\/.*/
+
+      # Manual deploy (prod)
+      - hold:
+          name: Go Prod
+          type: approval
+          requires:
+            - Publish image (auto)
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          name: Deploy prod
+          requires:
+            - Go Prod
+
+      # Feature deploy
+      - hold:
+          name: Go feature env
+          type: approval
+          requires:
+            - Build, Tests and generate Open API v2
+            - GCP Configuration
+            - OpenAPI validation
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /release\/.*/
+                - master
+      - publish_image:
+          name: Publish image (feature)
+          requires:
+            - Go feature env
+      - deploy_feature:
+          name: Deploy feature
+          requires:
+            - Publish image (feature)
+      - hold_delete_feature:
+          name: Delete feature env
+          type: approval
+          requires:
+            - GCP Configuration
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /release\/.*/
+                - master
+      - delete_feature:
+          name: Delete feature
+          requires:
+            - Delete feature env
